@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Level126Noob/HerokuStore#readme",
   "dependencies": {
+    "express": "^4.17.1",
     "inquirer": "^6.5.0",
     "mysql": "^2.17.1"
   }
