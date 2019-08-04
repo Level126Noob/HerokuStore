@@ -9,3 +9,7 @@ app.use(express.urlencoded({
 }));
 app.use(express.json());
 app.use(express.static(__dirname + "/public"));
+
+app.listen(PORT, function() {
+    console.log("The store is open on PORT: " + PORT);
+})
