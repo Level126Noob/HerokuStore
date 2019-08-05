@@ -1,7 +1,7 @@
-var mysql = require("mysql");
-var inquirer = require("inquirer")
+const mysql = require("mysql");
+const inquirer = require("inquirer")
 
-var connection = mysql.createConnection({
+const connection = mysql.createConnection({
     host: "localhost",
     port: 3306,
     user: "root",
@@ -9,11 +9,14 @@ var connection = mysql.createConnection({
     database: "bamazon"
 });
 
-connection.connect(function (err) {
+const errorFunc= err => {
     if (err) {
         throw err;
     }
-});
+};
+
+connection.connect(errorFunc());
+
 
 inquirer.prompt([{
         type: "input",
@@ -25,31 +28,37 @@ inquirer.prompt([{
         message: "How many units of the product would you like to purchase?",
         name: "amount"
     }
-]).then(function (employeeResponse) {
-    var query = "SELECT * FROM products WHERE ?"
+]).then(function (userInput) {
+    let query = "SELECT * FROM products WHERE ?"
     connection.query(query, {
-        item_id: employeeResponse.id
+        item_id: userInput.id
     }, function (err, res) {
         if (err) {
             throw err
         }
-        for (var i = 0; i < res.length; i++) {
+        for (let i = 0; i < res.length; i++) {
+            let item = res[i].item_id
+            let name = res[i].product_name
+            let price = res[i].price
+            let stock = res[i].stock_quantity
+            let itemsLeft = stock - userInput.amount
+
             console.log(
-                "item_id: " + res[i].item_id +
-                " || product_name: " + res[i].product_name +
-                " || price: " + res[i].price +
-                " || stock_quantity: " + res[i].stock_quantity
+                "item_id: " + item +
+                " || product_name: " + name +
+                " || price: " + price +
+                " || stock_quantity: " + stock
             )
 
-            if (res[i].stock_quantity === 0 || null) {
+            if (stock === 0 || null) {
                 deleteInventory();
             }
 
             function createTotal() {
-                var price = res[i].price * employeeResponse.amount
-                console.log("Your total is: " + price + " Dollars please!")
+                let total = price * userInput.amount
+                console.log("Your total is: " + total + " Dollars please!")
             }
-
+            
             function changeInventory() {
                 console.log("Changing inventory in the database!\n");
                 connection.query(
@@ -58,23 +67,19 @@ inquirer.prompt([{
                             stock_quantity: itemsLeft
                         },
                         {
-                            item_id: employeeResponse.id
+                            item_id: userInput.id
                         },
-                        function (err, res) {
-                            if (err) {
-                                throw err
-                            }
-                            console.log(res.affectedRows + " Product updated in the system!\n")
-                        }
+                       errorFunc(),
+                            console.log("Item inventory updated in the system!\n")
+                        
                     ]
                 )
             }
 
 
-            if (res[i].stock_quantity < employeeResponse.amount) {
+            if (stock < userInput.amount) {
                 console.log("Sorry we don't have that many items in stock, try buying a little less!")
             } else {
-                var itemsLeft = res[i].stock_quantity - employeeResponse.amount
                 console.log(itemsLeft + " Items remaining!...\n")
                 createTotal();
                 changeInventory();
@@ -87,14 +92,11 @@ inquirer.prompt([{
         console.log("Deleting item from the database...\n");
         connection.query(
             "DELETE FROM products WHERE ?", {
-                item_id: employeeResponse.id
+                item_id: userInput.id
             },
-            function (err, res) {
-                if (err) {
-                    throw err
-                }
-                console.log(res.affectedRows + " Products deleted from database!\n");
-            }
+            errorFunc(),
+                console.log("Item deleted from database!\n")
+            
         )
     }
 });
