@@ -31,7 +31,7 @@ if (process.env.JAWSDB_URL) {
   })
 }
 
-connection.connect(function (err) {
+connection.connect( (err) => {
   if (err) {
     console.error("error connecting: " + err.stack);
     return;
@@ -51,7 +51,7 @@ app.get("/", (_, res) => {
   });
 });
 
-app.get("/:id", function (req, res) {
+app.get("/:id", (req, res) => {
   connection.query("SELECT * FROM products where id = ?", [req.params.id], function (err, data) {
     if (err) {
       return res.status(500).send("it's broken dude");
@@ -63,7 +63,7 @@ app.get("/:id", function (req, res) {
 });
 
 
-app.post("/api/products", function (req, res) {
+app.post("/api/products", (req, res) => {
   connection.query("INSERT INTO products (product_name, stock_quantity, price) VALUES (?, ?, ?)", [req.body.product_name, req.body.stock_quantity, req.body.price], function (err, result) {
     if (err) {
       return res.status(500).send("it's broken dude");
@@ -87,7 +87,7 @@ app.delete("/api/products/:id", (req, res) => {
   });
 });
 
-app.put("/api/products/:id", function (req, res) {
+app.put("/api/products/:id", (req, res) => {
   connection.query("UPDATE products SET product_name = ?, stock_quantity = ?, price = ? WHERE id = ?",
     [req.body.product_name, req.body.stock_quantity, req.body.price, req.params.id],
     function (err, result) {
@@ -103,6 +103,6 @@ app.put("/api/products/:id", function (req, res) {
 });
 
 
-app.listen(PORT, function () {
+app.listen(PORT, () => {
    console.log("The store is open on: http://localhost:" + PORT);
 });
