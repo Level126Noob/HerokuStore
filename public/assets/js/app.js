@@ -41,14 +41,13 @@ $(function () {
         // Make sure to preventDefault on a submit event.
         event.preventDefault();
 
-        let updatedProduct = {
-            product_name: $("#name").val().trim(),
-            stock_quantity: $("#quantity").val().trim(),
+      var updatedProduct = {
+            product_name: $("#productName").val().trim(),
+            stock_quantity: $("#stockQuantity").val().trim(),
             price: $("#pricez").val().trim()
         };
 
         var id = $(this).data("id");
-        console.log(id);
 
         // Send the POST request.
         $.ajax("/api/products/" + id, {
@@ -62,4 +61,4 @@ $(function () {
             }
         );
     });
-})
+});

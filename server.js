@@ -85,8 +85,8 @@ app.delete("/api/products/:id", (req, res) => {
 });
 
 app.put("api/products/:id", function (req, res) {
-  connection.query("UPDATE products SET product_name = ?, stock_quantity = ?, price = ?, WHERE id = ?",
-    [req.body.product_name, req.body.stock_quantity, req.body.price, req.body.id],
+  connection.query("UPDATE products SET product_name = ?, stock_quantity = ?, price = ?",
+    [req.body.product_name, req.body.stock_quantity, req.body.priceS],
     function (err, result) {
       if (err) {
         return res.status(500).send("it's broken dude");
