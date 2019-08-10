@@ -94,7 +94,7 @@ app.put("/api/products/:id", (req, res) => {
       if (err) {
         return res.status(500).send("it's broken dude");
       } else if (!result.changedRows) {
-        console.log("whatever")
+        console.log("Change something bro")
         return res.status(404).send("404 dude");
         
       }
