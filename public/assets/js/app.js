@@ -47,7 +47,9 @@ $(function () {
             price: $("#pricez").val().trim()
         };
 
+        console.log(updatedProduct);
         var id = $(this).data("id");
+        console.log(id);
 
         // Send the POST request.
         $.ajax("/api/products/" + id, {

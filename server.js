@@ -84,14 +84,16 @@ app.delete("/api/products/:id", (req, res) => {
   });
 });
 
-app.put("api/products/:id", function (req, res) {
+app.put("/api/products/:id", function (req, res) {
   connection.query("UPDATE products SET product_name = ?, stock_quantity = ?, price = ?",
-    [req.body.product_name, req.body.stock_quantity, req.body.priceS],
+    [req.body.product_name, req.body.stock_quantity, req.body.price],
     function (err, result) {
       if (err) {
         return res.status(500).send("it's broken dude");
       } else if (!result.changedRows) {
+        console.log("whatever")
         return res.status(404).send("404 dude");
+        
       }
       res.status(200).end();
     });
@@ -99,5 +101,5 @@ app.put("api/products/:id", function (req, res) {
 
 
 app.listen(PORT, function () {
-  console.log("The store is open on: http://localhost:" + PORT);
+   console.log("The store is open on: http://localhost:" + PORT);
 });
