@@ -31,7 +31,7 @@ if (process.env.JAWSDB_URL) {
   })
 }
 
-connection.connect( (err) => {
+connection.connect((err) => {
   if (err) {
     console.error("error connecting: " + err.stack);
     return;
@@ -96,7 +96,7 @@ app.put("/api/products/:id", (req, res) => {
       } else if (!result.changedRows) {
         console.log("Change something bro")
         return res.status(404).send("404 dude");
-        
+
       }
       res.status(200).end();
     });
@@ -104,5 +104,5 @@ app.put("/api/products/:id", (req, res) => {
 
 
 app.listen(PORT, () => {
-   console.log("The store is open on: http://localhost:" + PORT);
+  console.log("The store is open on: http://localhost:" + PORT);
 });

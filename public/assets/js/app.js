@@ -1,4 +1,4 @@
-$( () => {
+$(() => {
     $(".deletebutton").on("click", function (event) {
         let id = $(this).data("id");
 
@@ -41,7 +41,7 @@ $( () => {
         // Make sure to preventDefault on a submit event.
         event.preventDefault();
 
-      var updatedProduct = {
+        var updatedProduct = {
             product_name: $("#productName").val().trim(),
             stock_quantity: $("#stockQuantity").val().trim(),
             price: $("#pricez").val().trim()
