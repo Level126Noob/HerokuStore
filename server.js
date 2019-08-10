@@ -38,6 +38,10 @@ connection.connect(function(err) {
       }
   }
 
+app.get("/assets/js/app.js", function(req, res) {
+  res.sendFile(path.join(__dirname + '/assets/js/app.js'))
+});
+
   app.get("/", (_, res) => {
     connection.query("SELECT * FROM products", function(err, data) {
         if (err) {
@@ -73,7 +77,7 @@ connection.connect(function(err) {
   
 
   app.delete("/api/products/:id", (req, res) => {
-      connect.query("DELETE FROM products WHERE id = ?", [req.params.id], function(err, result) {
+      connection.query("DELETE FROM products WHERE id = ?", [req.params.id], function(err, result) {
           if(err) {
               return res.status(500).send("it's broken dude");
           }
