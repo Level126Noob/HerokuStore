@@ -1,95 +1,27 @@
 <h1>Heroku Store</h1>
 
 <ul>
-  {{#each products}}
-  <li>
+    {{#each products}}
     <p>
-      {{this.id}}. {{this.product}}
-
-      <button data-productid="{{this.id}}" class="delproduct">Delete product!</button>
+        <div id="product">
+            <h4>Product ID: {{this.id}}</h4>
+               <h5>Product Name: {{this.product_name}}</h5> 
+            <h5>Price (Dollars): {{this.price}}</h5>
+            <h5>Stock: {{this.stock_quantity}}</h5>
+            <button data-id="{{this.id}}" class="deletebutton">Delete Product!</button>
+           <a href="/{{this.id}}"><button data-productid="{{this.id}}" class="updatebutton">Update Product!</button></a>
+        </div>
     </p>
-  </li>
-  {{/each}}
+    {{/each}}
 </ul>
 
-<h2>Create a product</h2>
-<form id="createproduct" class="button-size">
-  <textarea type="text" name="product"></textarea>
-  <button type="submit">Save product!</button>
+<h2>Add a Product</h2>
+
+<form class="addproduct">
+  Name: <input type="text" id="product_name" name="product_name"><br>
+  Stock: <input type="number" id="stock_quantity" name="stock_quantity"><br>
+  Price (dollars): <input type="number" id="price" name="price">
+  <button type="submit">Add Your Product</button>
 </form>
-
-<h2>Update a product</h2>
-<form id="updateproduct" class="button-size">
-  <select name="id">
-		{{#each products}}
-			<option value="{{this.id}}">{{this.product}}</option>
-		{{/each}}
-	</select>
-  <textarea type="text" name="product" placeholder="product"></textarea>
-  <button type="submit">Update product!</button>
-</form>
-
-<script type="text/javascript">
-  $(".delproduct").on("click", function(event) {
-    // Get the ID from the button.
-    // This is shorthand for $(this).attr("data-productid")
-    var id = $(this).data("productid");
-
-    // Send the DELETE request.
-    $.ajax("/api/products/" + id, {
-      type: "DELETE"
-    }).then(
-      function() {
-        console.log("deleted id ", id);
-        // Reload the page to get the updated list
-        location.reload();
-      }
-    );
-  });
-
-  $("#createproduct").on("submit", function(event) {
-    // Make sure to preventDefault on a submit event.
-    event.preventDefault();
-
-    // [name=product] will find an element with a "name" attribute equal to the string "product"
-    var newproduct = {
-      product: $("#createproduct [name=product]").val().trim()
-    };
-
-    // Send the POST request.
-    $.ajax("/api/products", {
-      type: "POST",
-      data: newproduct
-    }).then(
-      function() {
-        console.log("created new product");
-        // Reload the page to get the updated list
-        location.reload();
-      }
-    );
-  });
-
-  $("#updateproduct").on("submit", function(event) {
-    // Make sure to preventDefault on a submit event.
-    event.preventDefault();
-
-    // Get the ID by finding an element with a "name" attribute equal to the string "id"
-    var id = $("[name=id]").val().trim();
-
-    var updatedProduct = {
-      product: $("#updateproduct [name=product]").val().trim()
-    };
-
-    // Send the PUT request.
-    $.ajax("/api/products/" + id, {
-      type: "PUT",
-      data: updatedProduct
-    }).then(
-      function() {
-        console.log("updated id ", id);
-        // Reload the page to get the updated list
-        location.reload();
-      }
-    );
-  });
-</script>
+    
+  

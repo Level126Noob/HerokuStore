@@ -1,0 +1,22 @@
+
+<h1>Update the product with an id of {{this.id}}</h1>
+
+<form data-id="{{this.id}}" class="update-form">
+
+  <div class="form-group">
+    <label for="name">Product Name:</label>
+    <input type="text" id="name" name="product_name" value="{{product_name}}">
+  </div>
+
+  <div class="form-group">
+    <label for="quantity">Stock Quantity:</label>
+    <input type="number" id="quantity" name="stock_quantity" value="{{stock_quantity}}">
+  </div>
+
+  <div class="form-group">
+    <label for="price">Price (dollars): </label>
+    <input type="number" id="pricez" name="price" value="{{price}}">
+  </div>
+
+  <button type="submit">Update Product</button>
+</form>
