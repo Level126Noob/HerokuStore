@@ -32,16 +32,6 @@ connection.connect(function(err) {
     console.log("connected as id " + connection.threadId);
   });
 
-  errorFunc = (err, data) => {
-      if (err) {
-          return res.status(500).send("It's broken dude");
-      }
-  }
-
-app.get("/assets/js/app.js", function(req, res) {
-  res.sendFile(path.join(__dirname + '/assets/js/app.js'))
-});
-
   app.get("/", (_, res) => {
     connection.query("SELECT * FROM products", function(err, data) {
         if (err) {

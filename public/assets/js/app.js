@@ -1,12 +1,11 @@
 $(".deletebutton").on("click", (event) => {
     let id = $(this).data("id");
 
-    $.ajax("/api/products/" + id, {
+    $.ajax("/api/products/:" + id, {
         type: "DELETE"
     }).then(
         () => {
             console.log("deleted id", id);
-            location.reload();
         }
     )
 })
@@ -48,7 +47,7 @@ $(".update-form").on("submit", function(event) {
   var id = $(this).data("id");
 
   // Send the POST request.
-  $.ajax("/api/products/" + id, {
+  $.ajax("/api/products/:" + id, {
     type: "PUT",
     data: updatedProduct
   }).then(

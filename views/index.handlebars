@@ -3,13 +3,13 @@
 <ul>
     {{#each products}}
     <p>
-        <div id="product">
+        <div id="products">
             <h4>Product ID: {{this.id}}</h4>
                <h5>Product Name: {{this.product_name}}</h5> 
             <h5>Price (Dollars): {{this.price}}</h5>
             <h5>Stock: {{this.stock_quantity}}</h5>
             <button data-id="{{this.id}}" class="deletebutton">Delete Product!</button>
-           <a href="/{{this.id}}"><button data-productid="{{this.id}}" class="updatebutton">Update Product!</button></a>
+           <a href="/{{this.id}}"><button data-id="{{this.id}}" class="updatebutton">Update Product!</button></a>
         </div>
     </p>
     {{/each}}
