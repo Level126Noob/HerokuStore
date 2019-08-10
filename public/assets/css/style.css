@@ -1,7 +1,7 @@
 #product {
     position: relative;
     float: left;
-    width: 40%;
+    width: 20%;
 }
 
 button {
@@ -12,7 +12,13 @@ body {
     background-color: grey;
 }
 
-h1 {
+.title {
     text-align: center;
+    font-weight: bold;
+    font-size: 30px;
+    background-color: teal;
+    width: 15%;
+    margin: 0 auto;
+    border-radius: 25px;
 
 }
