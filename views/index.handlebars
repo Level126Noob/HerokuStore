@@ -1,18 +1,18 @@
 <h1>Heroku Store</h1>
 
 <ul>
-    {{#each products}}
-    <p>
-        <div id="products">
-            <h4>Product ID: {{this.id}}</h4>
-               <h5>Product Name: {{this.product_name}}</h5> 
-            <h5>Price (Dollars): {{this.price}}</h5>
-            <h5>Stock: {{this.stock_quantity}}</h5>
-            <button data-id="{{this.id}}" class="deletebutton">Delete Product!</button>
-           <a href="/{{this.id}}"><button data-id="{{this.id}}" class="updatebutton">Update Product!</button></a>
-        </div>
-    </p>
-    {{/each}}
+  {{#each products}}
+  <p>
+    <div id="product">
+      <h4>Product ID: {{this.id}}</h4>
+      <h5>Product Name: {{this.product_name}}</h5>
+      <h5>Price (Dollars): {{this.price}}</h5>
+      <h5>Stock: {{this.stock_quantity}}</h5>
+      <button data-id="{{this.id}}" class="deletebutton">Delete Product!</button>
+      <a href="/{{this.id}}"><button data-id="{{this.id}}" class="updatebutton">Update Product!</button></a>
+    </div>
+  </p>
+  {{/each}}
 </ul>
 
 <h2>Add a Product</h2>
@@ -23,5 +23,3 @@
   Price (dollars): <input type="number" id="price" name="price">
   <button type="submit">Add Your Product</button>
 </form>
-    
-  
